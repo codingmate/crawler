@@ -3,13 +3,17 @@ package sypg.main;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+
 
 public class SeleniumApp {
 	public static void main(String[] args) {
@@ -21,7 +25,7 @@ public class SeleniumApp {
 		
 		/* WebDriver 옵션 설정 */
 		ChromeOptions chromeOptions = new ChromeOptions();
-		chromeOptions.addArguments("--start-maximized"); // 전체화면으로 실행
+		//chromeOptions.addArguments("--start-maximized"); // 전체화면으로 실행
 		chromeOptions.addArguments("--disabled-popup-blocking"); // 팝업 무시
 		chromeOptions.addArguments("--disable-default-apps"); // 기본앱 사용 안함
 		//chromeOptions.addArguments("headless"); // 창을 띄우지 않고 작업
@@ -47,7 +51,8 @@ public class SeleniumApp {
 		//chromeDriver.get("https://www.naver.com/"); // 네이버
 		//chromeDriver.get("https://selenium.dev");
 		//chromeDriver.get("https://www.naver.com/");
-		chromeDriver.navigate().to("https://selenium.dev");
+		//chromeDriver.navigate().to("https://selenium.dev");
+		chromeDriver.navigate().to("https://fow.kr/robots.txt");
 		
 		/* 뒤로 가기 버튼 클릭*/
 		//chromeDriver.navigate().back();
@@ -68,12 +73,18 @@ public class SeleniumApp {
 //				System.out.println(chromeDriver.getWindowHandle());
 			/* find */
 				//System.out.println(chromeDriver.findElement(By.id("selenium_grid")).getAttribute("xmlns") );
-				for ( WebElement webElement : chromeDriver.findElements(By.className("selenium-logo svg")) ) {
-					System.out.println(webElement.getAttribute("data-name"));
-				}
+//				for ( WebElement webElement : chromeDriver.findElements(By.cssSelector(".selenium-logo svg")) ) {
+//					System.out.println(webElement.getAttribute("id"));
+//				}
+		
+		
+		for ( String line : Arrays.asList(chromeDriver.getPageSource().split("\n")) ) {
+			System.out.println(line);
+		}
+		
 						
 		/* chromeDriver 종료 */
-		chromeDriver.quit();
+		//chromeDriver.quit();
 		
 		//List<WebElement> imgElement = chromeDriver.findElements(By.cssSelector("img"));
 		
@@ -84,3 +95,4 @@ public class SeleniumApp {
 		
 	}
 }
+
